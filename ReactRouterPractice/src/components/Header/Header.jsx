@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-
+import About from "./About";
+import Contact from "./Contact";
+import Services from "./Services";
+import {Link} from "react-router-dom";
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -10,11 +13,11 @@ export default function Header() {
         <div className="text-2xl font-bold text-blue-600">MyLogo</div>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex space-x-8 text-gray-700 font-medium">
-          <li className="hover:text-blue-600 cursor-pointer">Home</li>
-          <li className="hover:text-blue-600 cursor-pointer">About</li>
-          <li className="hover:text-blue-600 cursor-pointer">Services</li>
-          <li className="hover:text-blue-600 cursor-pointer">Contact</li>
+       <ul className="hidden md:flex space-x-8 text-gray-700 font-medium">
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/about">About</Link></li>
+          <li><Link to="/services">Services</Link></li>
+          <li><Link to="/contact">Contact</Link></li>
         </ul>
 
         {/* Mobile Button (Text instead of Icon) */}
@@ -26,15 +29,7 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Mobile Menu */}
-      {isOpen && (
-        <ul className="md:hidden bg-white px-6 py-4 space-y-4 shadow-lg">
-          <li className="hover:text-blue-600 cursor-pointer">Home</li>
-          <li className="hover:text-blue-600 cursor-pointer">About</li>
-          <li className="hover:text-blue-600 cursor-pointer">Services</li>
-          <li className="hover:text-blue-600 cursor-pointer">Contact</li>
-        </ul>
-      )}
+     
     </nav>
   );
 }
