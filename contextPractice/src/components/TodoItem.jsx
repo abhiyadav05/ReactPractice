@@ -1,6 +1,18 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
+import { useTodo } from '../context/CreateContext';
 
-function TodoItem() {
+function TodoItem({todo}) {
+    const [todoMsg,setTodoMsg]=useState(todo.todo);
+    const [isTodoEditable,setIsTodoEditable]=useState(false);
+    const {updateTodo,deleteTodo,toggleCompleted}=useTodo();
+    const editTodo=()=>{
+                    updateTodo(todo.id,{...todo,todo : todoMsg})
+                    setIsTodoEditable(false);
+    }
+
+    const toggleComplete=()=>{
+        toggleCompleted(todo.id);
+    }
   return (
     <div
             className={`flex border border-black/10 rounded-lg px-3 py-1.5 gap-x-3 shadow-sm shadow-white/50 duration-300  text-black ${
@@ -11,7 +23,7 @@ function TodoItem() {
                 type="checkbox"
                 className="cursor-pointer"
                 checked={todo.completed}
-                onChange={toggleCompleted}
+                onChange={toggleComplete}
             />
             <input
                 type="text"
@@ -21,6 +33,7 @@ function TodoItem() {
                 value={todoMsg}
                 onChange={(e) => setTodoMsg(e.target.value)}
                 readOnly={!isTodoEditable}
+
             />
             {/* Edit, Save Button */}
             <button
@@ -39,7 +52,7 @@ function TodoItem() {
             {/* Delete Todo Button */}
             <button
                 className="inline-flex w-8 h-8 rounded-lg text-sm border border-black/10 justify-center items-center bg-gray-50 hover:bg-gray-100 shrink-0"
-                onClick={() => deleteTodo(todo.id)}
+               onClick={()=>deleteTodo(todo.id)}
             >
                 ❌
             </button>
