@@ -1,6 +1,6 @@
 import { use } from "react";
 import conf from "../conf/conf";
-import { Client, ID, Databases, Query } from "appwrite";
+import { Client, ID, Databases,Storage, Query } from "appwrite";
 
 export class Services{
             client = new Client();
@@ -12,8 +12,9 @@ export class Services{
                 .setEndpoint(conf.appWriteUrl)
                 .setProject(conf.projectId);
 
-                this.database=new Databases();
-                this.buket=new Storage();
+                this.database = new Databases(this.client);
+                this.bucket = new Storage(this.client);
+
             }
 
             async createPost({title,slug,content,featureImg,
